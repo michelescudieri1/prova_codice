@@ -1,0 +1,182 @@
+:root {
+  --arcade-blue: #2121ff;
+  --arcade-yellow: #ffff00;
+  --arcade-red: #ff0000;
+  --arcade-pink: #ffb8ff;
+  --arcade-cyan: #00ffff;
+  --arcade-orange: #ffb852;
+  --arcade-black: #000000;
+  --arcade-font: 'Press Start 2P', cursive;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--arcade-black);
+  color: white;
+  font-family: var(--arcade-font);
+  line-height: 1.6;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle, #111 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.maze-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 4px solid var(--arcade-blue);
+  box-shadow: 0 0 20px var(--arcade-blue), inset 0 0 20px var(--arcade-blue);
+  border-radius: 10px;
+  margin-top: 40px;
+  position: relative;
+}
+
+header {
+  text-align: center;
+  padding: 40px 0;
+  border-bottom: 4px double var(--arcade-blue);
+  margin-bottom: 40px;
+}
+
+h1 {
+  font-size: 3rem;
+  color: var(--arcade-yellow);
+  text-shadow: 4px 4px 0px var(--arcade-red);
+  letter-spacing: 5px;
+  animation: flicker 2s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+  90% { opacity: 1; }
+}
+
+.stats-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: #111;
+  border: 2px solid var(--arcade-blue);
+  margin-bottom: 30px;
+  font-size: 0.8rem;
+}
+
+.score-label { color: var(--arcade-yellow); }
+.score-value { color: white; }
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.plushie-card {
+  background: #080808;
+  border: 3px solid var(--arcade-blue);
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.plushie-card:hover {
+  transform: scale(1.05);
+  border-color: var(--arcade-yellow);
+  z-index: 2;
+}
+
+.plushie-card img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border: 2px solid #333;
+  margin-bottom: 15px;
+}
+
+.plushie-name {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: var(--arcade-yellow);
+}
+
+.plushie-price {
+  font-size: 1rem;
+  color: var(--arcade-cyan);
+  margin-bottom: 20px;
+}
+
+.buy-btn {
+  background: var(--arcade-yellow);
+  color: black;
+  border: none;
+  padding: 15px 25px;
+  font-family: var(--arcade-font);
+  font-size: 0.7rem;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s;
+}
+
+.buy-btn:hover {
+  background: white;
+}
+
+.cart-panel {
+  position: fixed;
+  right: -400px;
+  top: 0;
+  width: 400px;
+  height: 100vh;
+  background: #000;
+  border-left: 4px solid var(--arcade-blue);
+  z-index: 100;
+  padding: 40px 20px;
+  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-panel.open {
+  right: 0;
+}
+
+.cart-title {
+  color: var(--arcade-yellow);
+  margin-bottom: 30px;
+  font-size: 1.5rem;
+}
+
+.pixel-border {
+  border: 4px solid white;
+  padding: 10px;
+  position: relative;
+}
+
+.arcade-footer {
+  margin-top: 60px;
+  text-align: center;
+  padding: 40px;
+  border-top: 4px solid var(--arcade-blue);
+  font-size: 0.6rem;
+  color: #666;
+}
+
+.ghost-float {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  animation: float 10s linear infinite;
+  opacity: 0.5;
+}
+
+@keyframes float {
+  from { left: -50px; }
+  to { left: 100%; }
+}

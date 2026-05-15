@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAC-SHOP | Arcade Plushie Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="maze-container">
+        <header>
+            <h1>PAC-SHOP</h1>
+            <p style="font-size: 0.6rem; color: var(--arcade-cyan); margin-top: 10px;">LEVEL 1: PLUSHIE MANIA</p>
+        </header>
+
+        <div class="stats-bar">
+            <div>
+                <span class="score-label">SCORE:</span>
+                <span id="cart-total" class="score-value">00000</span>
+            </div>
+            <div>
+                <span class="score-label">HIGH SCORE:</span>
+                <span class="score-value">99999</span>
+            </div>
+            <div>
+                <span class="score-label">ITEMS:</span>
+                <span id="cart-count" class="score-value">0</span>
+            </div>
+        </div>
+
+        <main class="product-grid">
+            <!-- Pac-Man -->
+            <article class="plushie-card">
+                <img src="pacman_plushie_1778840863511.png" alt="Pac-Man Plushie">
+                <h2 class="plushie-name">PAC-MAN</h2>
+                <p class="plushie-price">2500 PTS</p>
+                <button class="buy-btn" onclick="addToCart('PAC-MAN', 2500)">INSERT COIN</button>
+            </article>
+
+            <!-- Blinky -->
+            <article class="plushie-card">
+                <img src="blinky_plushie_1778838084623.png" alt="Blinky Plushie">
+                <h2 class="plushie-name">BLINKY</h2>
+                <p class="plushie-price">2000 PTS</p>
+                <button class="buy-btn" onclick="addToCart('BLINKY', 2000)">INSERT COIN</button>
+            </article>
+
+            <!-- Pinky -->
+            <article class="plushie-card">
+                <img src="pinky_plushie_1778838103777.png" alt="Pinky Plushie">
+                <h2 class="plushie-name">PINKY</h2>
+                <p class="plushie-price">2000 PTS</p>
+                <button class="buy-btn" onclick="addToCart('PINKY', 2000)">INSERT COIN</button>
+            </article>
+
+            <!-- Inky -->
+            <article class="plushie-card">
+                <img src="inky_plushie_1778838369067.png" alt="Inky Plushie">
+                <h2 class="plushie-name">INKY</h2>
+                <p class="plushie-price">2000 PTS</p>
+                <button class="buy-btn" onclick="addToCart('INKY', 2000)">INSERT COIN</button>
+            </article>
+
+            <!-- Clyde -->
+            <article class="plushie-card">
+                <img src="clyde_plushie_1778838471619.png" alt="Clyde Plushie">
+                <h2 class="plushie-name">CLYDE</h2>
+                <p class="plushie-price">2000 PTS</p>
+                <button class="buy-btn" onclick="addToCart('CLYDE', 2000)">INSERT COIN</button>
+            </article>
+        </main>
+
+        <footer class="arcade-footer">
+            <p>© 1980-2024 PAC-SHOP ENTERTAINMENT</p>
+            <p>GAME OVER IS NOT AN OPTION</p>
+        </footer>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div id="cart-panel" class="cart-panel">
+        <h2 class="cart-title">YOUR INVENTORY</h2>
+        <div id="cart-items" style="margin-bottom: 20px;">
+            <!-- Items added here -->
+        </div>
+        <div class="pixel-border">
+            <p>TOTAL: <span id="panel-total">0</span> PTS</p>
+            <button class="buy-btn" style="margin-top: 20px;" onclick="checkout()">CHECKOUT (ENTER)</button>
+        </div>
+        <button onclick="toggleCart()" style="background: none; border: none; color: white; cursor: pointer; margin-top: 20px; font-family: inherit; font-size: 0.5rem;">[ CLOSE ]</button>
+    </div>
+
+    <script>
+        let cart = [];
+        let total = 0;
+
+        function addToCart(name, price) {
+            cart.push({name, price});
+            total += price;
+            updateDisplay();
+            toggleCart(true);
+            
+            // Audio effect simulation
+            console.log("WAKA WAKA!");
+        }
+
+        function updateDisplay() {
+            document.getElementById('cart-total').innerText = total.toString().padStart(5, '0');
+            document.getElementById('cart-count').innerText = cart.length;
+            document.getElementById('panel-total').innerText = total;
+            
+            const itemsContainer = document.getElementById('cart-items');
+            itemsContainer.innerHTML = cart.map((item, index) => `
+                <div style="display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.6rem;">
+                    <span>${item.name}</span>
+                    <span>${item.price} PTS</span>
+                </div>
+            `).join('');
+        }
+
+        function toggleCart(forceOpen = false) {
+            const panel = document.getElementById('cart-panel');
+            if (forceOpen) panel.classList.add('open');
+            else panel.classList.toggle('open');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert("INSERT COIN TO START!");
+                return;
+            }
+            alert("CONGRATULATIONS! YOU REACHED THE NEXT LEVEL (CHECKOUT).");
+            cart = [];
+            total = 0;
+            updateDisplay();
+            toggleCart(false);
+        }
+    </script>
+</body>
+</html>
